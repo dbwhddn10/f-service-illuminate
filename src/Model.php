@@ -12,7 +12,7 @@ class Model extends \Illuminate\Database\Eloquent\Model
     const UPDATED_AT = null;
 
     public $incrementing = false;
-    public $guarded = [];
+    protected $guarded = [];
 
     public function setCast($key, $value)
     {
