@@ -23,12 +23,12 @@ class Service {
 
     public function __construct(array $inputs = [], array $names = [], $validated = [])
     {
-        $this->childs    = inst(Collection::class);
-        $this->data      = inst(Collection::class);
-        $this->errors    = inst(Collection::class);
-        $this->inputs    = inst(Collection::class, [$inputs]);
-        $this->names     = inst(Collection::class, [$names]);
-        $this->validated = inst(Collection::class, [array_fill_keys($validated, true)]);
+        $this->childs    = new Collection;
+        $this->data      = new Collection;
+        $this->errors    = new Collection;
+        $this->inputs    = new Collection($inputs);
+        $this->names     = new Collection($names);
+        $this->validated = new Collection(array_fill_keys($validated, true));
         $this->processed = false;
 
         foreach ( $validated as $value )
@@ -53,7 +53,7 @@ class Service {
 
         ksort($data);
 
-        return inst(Collection::class, [$data]);
+        return new Collection($data);
     }
 
     public function errors()
@@ -72,7 +72,7 @@ class Service {
 
         $arr = array_merge($arr, static::getArrBindNames());
 
-        return inst(Collection::class, [$arr]);
+        return new Collection($arr);
     }
 
     public static function getAllCallbackLists()
@@ -97,7 +97,7 @@ class Service {
             $arr[$key1][$key2] = $resolver;
         }
 
-        return inst(Collection::class, [$arr]);
+        return new Collection($arr);
     }
 
     public static function getAllLoaders()
@@ -111,7 +111,7 @@ class Service {
 
         $arr = array_merge($arr, static::getArrLoaders());
 
-        return inst(Collection::class, [$arr]);
+        return new Collection($arr);
     }
 
     public static function getAllPromiseLists()
@@ -125,7 +125,7 @@ class Service {
 
         $arr = array_merge_recursive($arr, static::getArrPromiseLists());
 
-        return inst(Collection::class, [$arr]);
+        return new Collection($arr);
     }
 
     public static function getAllRuleLists()
@@ -139,7 +139,7 @@ class Service {
 
         $arr = array_merge_recursive($arr, static::getArrRuleLists());
 
-        return inst(Collection::class, [$arr]);
+        return new Collection($arr);
     }
 
     public static function getAllTraits()
@@ -153,7 +153,7 @@ class Service {
 
         $arr = array_merge_recursive($arr, static::getArrTraits());
 
-        return inst(Collection::class, [$arr]);
+        return new Collection($arr);
     }
 
     public static function getArrBindNames()
@@ -188,7 +188,7 @@ class Service {
 
     protected function getValidationErrors($data, $ruleList)
     {
-        $factory = inst(ValidationFactory::class);
+        $factory = app(ValidationFactory::class);
         $factory->resolver(function ($tr, array $data, array $rules, array $messages, array $names) {
 
             return new Validator($tr, $data, $rules, $messages, $names);
@@ -230,7 +230,7 @@ class Service {
             }
         }
 
-        return inst($class, [$data, $names, $valids]);
+        return new $class($data, $names, $valids);
     }
 
     public function inputs()
@@ -595,6 +595,6 @@ class Service {
 
         ksort($arr);
 
-        return inst(Collection::class, [$arr]);
+        return new Collection($arr);
     }
 }

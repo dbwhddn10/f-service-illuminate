@@ -52,12 +52,12 @@ class SelectQueryService extends Service
         return [
             'available_expands' => ['model_class', function ($modelClass) {
 
-                return inst($modelClass)->getExpandable();
+                return (new $modelClass)->getExpandable();
             }],
 
             'available_fields' => ['model_class', function ($modelClass) {
 
-                $model = inst($modelClass);
+                $model = new $modelClass;
 
                 return array_merge($model->getFillable(), $model->getGuarded());
             }],
