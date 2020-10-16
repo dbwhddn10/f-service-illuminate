@@ -81,21 +81,10 @@ class Service {
 
         foreach ( static::getArrTraits() as $class )
         {
-            $arr = array_merge_recursive($arr, $class::getAllCallbackLists()->all());
+            $arr = array_merge($arr, $class::getAllCallbackLists()->all());
         }
 
-        foreach ( static::getArrCallbackLists() as $key => $resolver )
-        {
-            $key1 = explode('.', $key)[0];
-            $key2 = explode('.', $key)[1];
-
-            if ( ! array_key_exists($key1, $arr) )
-            {
-                $arr[$key1] = new Collection;
-            }
-
-            $arr[$key1][$key2] = $resolver;
-        }
+        $arr = array_merge($arr, static::getArrCallbackLists());
 
         return new Collection($arr);
     }
@@ -563,12 +552,11 @@ class Service {
         $orderedKeys  = $this->getPromiseOrderedDependencies($promiseKeys);
         $restKeys     = array_diff($callbackKeys, $orderedKeys);
         $callbackKeys = array_merge($orderedKeys, $restKeys);
-        $callbacks    = $this->getAllCallbackLists()->get($key);
 
         foreach ( $callbackKeys as $callbackKey )
         {
-            $callback  = $callbacks[explode('.', $callbackKey)[1]];
-            $deps      = array_slice($callback, 0, -1);
+            $callback = $this->getAllCallbackLists()->get($callbackKey);
+            $deps     = array_slice($callback, 0, -1);
 
             foreach ( $deps as $dep )
             {
