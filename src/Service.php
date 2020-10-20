@@ -65,9 +65,9 @@ class Service {
     {
         $arr = [];
 
-        foreach ( static::getArrTraits() as $class )
+        foreach ( static::getAllTraits() as $class )
         {
-            $arr = array_merge($arr, $class::getAllBindNames()->all());
+            $arr = array_merge($arr, $class::getArrBindNames());
         }
 
         $arr = array_merge($arr, static::getArrBindNames());
@@ -79,9 +79,9 @@ class Service {
     {
         $arr = [];
 
-        foreach ( static::getArrTraits() as $class )
+        foreach ( static::getAllTraits() as $class )
         {
-            $arr = array_merge($arr, $class::getAllCallbackLists()->all());
+            $arr = array_merge($arr, $class::getArrCallbackLists());
         }
 
         $arr = array_merge($arr, static::getArrCallbackLists());
@@ -93,9 +93,9 @@ class Service {
     {
         $arr = [];
 
-        foreach ( static::getArrTraits() as $class )
+        foreach ( static::getAllTraits() as $class )
         {
-            $arr = array_merge($arr, $class::getAllLoaders()->all());
+            $arr = array_merge($arr, $class::getArrLoaders());
         }
 
         $arr = array_merge($arr, static::getArrLoaders());
@@ -107,9 +107,9 @@ class Service {
     {
         $arr = [];
 
-        foreach ( static::getArrTraits() as $class )
+        foreach ( static::getAllTraits() as $class )
         {
-            $arr = array_merge_recursive($arr, $class::getAllPromiseLists()->all());
+            $arr = array_merge_recursive($arr, $class::getArrPromiseLists());
         }
 
         $arr = array_merge_recursive($arr, static::getArrPromiseLists());
@@ -121,9 +121,9 @@ class Service {
     {
         $arr = [];
 
-        foreach ( static::getArrTraits() as $class )
+        foreach ( static::getAllTraits() as $class )
         {
-            $arr = array_merge_recursive($arr, $class::getAllRuleLists()->all());
+            $arr = array_merge_recursive($arr, $class::getArrRuleLists());
         }
 
         $arr = array_merge_recursive($arr, static::getArrRuleLists());
@@ -137,10 +137,13 @@ class Service {
 
         foreach ( static::getArrTraits() as $class )
         {
-            $arr = array_merge_recursive($arr, $class::getAllTraits()->all());
+            $arr = array_merge($arr, $class::getAllTraits()->all());
         }
 
-        $arr = array_merge_recursive($arr, static::getArrTraits());
+        $arr = array_merge($arr, static::getArrTraits());
+        $arr = array_unique($arr);
+
+        sort($arr);
 
         return new Collection($arr);
     }
