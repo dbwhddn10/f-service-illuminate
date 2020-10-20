@@ -1,10 +1,10 @@
 <?php
 
-namespace Illuminate\Extend\Service\Database\Trait;
+namespace Illuminate\Extend\Service\Database\Feature;
 
 use Illuminate\Extend\Service;
 
-class QueryTraitService extends Service
+class QueryFeatureService extends Service
 {
     public static function getArrBindNames()
     {

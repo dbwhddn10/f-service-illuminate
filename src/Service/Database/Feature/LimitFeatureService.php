@@ -1,11 +1,11 @@
 <?php
 
-namespace Illuminate\Extend\Service\Database\Trait;
+namespace Illuminate\Extend\Service\Database\Feature;
 
 use Illuminate\Extend\Service;
-use Illuminate\Extend\Service\Database\Trait\QueryTraitService;
+use Illuminate\Extend\Service\Database\Feature\QueryFeatureService;
 
-class LimitTraitService extends Service
+class LimitFeatureService extends Service
 {
     public static function getArrBindNames()
     {
@@ -48,7 +48,7 @@ class LimitTraitService extends Service
     public static function getArrTraits()
     {
         return [
-            QueryTraitService::class,
+            QueryFeatureService::class,
         ];
     }
 }

@@ -3,9 +3,9 @@
 namespace Illuminate\Extend\Service\Database;
 
 use Illuminate\Extend\Service;
-use Illuminate\Extend\Service\Database\Trait\ExpandsTraitService;
-use Illuminate\Extend\Service\Database\Trait\FieldsTraitService;
-use Illuminate\Extend\Service\Database\Trait\OrderByTraitService;
+use Illuminate\Extend\Service\Database\Feature\ExpandsFeatureService;
+use Illuminate\Extend\Service\Database\Feature\FieldsFeatureService;
+use Illuminate\Extend\Service\Database\Feature\OrderByFeatureService;
 
 class ListService extends Service
 {
@@ -42,9 +42,9 @@ class ListService extends Service
     public static function getArrTraits()
     {
         return [
-            ExpandsTraitService::class,
-            FieldsTraitService::class,
-            OrderByTraitService::class,
+            ExpandsFeatureService::class,
+            FieldsFeatureService::class,
+            OrderByFeatureService::class,
         ];
     }
 }

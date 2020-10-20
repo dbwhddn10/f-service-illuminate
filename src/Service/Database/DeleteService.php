@@ -3,7 +3,7 @@
 namespace Illuminate\Extend\Service\Database;
 
 use Illuminate\Extend\Service;
-use Illuminate\Extend\Service\Database\Trait\ModelTraitService;
+use Illuminate\Extend\Service\Database\Feature\ModelFeatureService;
 
 class DeleteService extends Service
 {
@@ -45,7 +45,7 @@ class DeleteService extends Service
     public static function getArrTraits()
     {
         return [
-            ModelTraitService::class,
+            ModelFeatureService::class,
         ];
     }
 }

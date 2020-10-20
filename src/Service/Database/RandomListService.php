@@ -3,9 +3,9 @@
 namespace Illuminate\Extend\Service\Database;
 
 use Illuminate\Extend\Service;
-use Illuminate\Extend\Service\Database\Trait\ExpandsTraitService;
-use Illuminate\Extend\Service\Database\Trait\FieldsTraitService;
-use Illuminate\Extend\Service\Database\Trait\LimitTraitService;
+use Illuminate\Extend\Service\Database\Feature\ExpandsFeatureService;
+use Illuminate\Extend\Service\Database\Feature\FieldsFeatureService;
+use Illuminate\Extend\Service\Database\Feature\LimitFeatureService;
 
 class RandomListService extends Service
 {
@@ -55,9 +55,9 @@ class RandomListService extends Service
     public static function getArrTraits()
     {
         return [
-            ExpandsTraitService::class,
-            FieldsTraitService::class,
-            LimitTraitService::class,
+            ExpandsFeatureService::class,
+            FieldsFeatureService::class,
+            LimitFeatureService::class,
         ];
     }
 }

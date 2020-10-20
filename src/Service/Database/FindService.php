@@ -3,9 +3,9 @@
 namespace Illuminate\Extend\Service\Database;
 
 use Illuminate\Extend\Service;
-use Illuminate\Extend\Service\Database\Trait\ExpandsTraitService;
-use Illuminate\Extend\Service\Database\Trait\FieldsTraitService;
-use Illuminate\Extend\Service\Database\Trait\ModelTraitService;
+use Illuminate\Extend\Service\Database\Feature\ExpandsFeatureService;
+use Illuminate\Extend\Service\Database\Feature\FieldsFeatureService;
+use Illuminate\Extend\Service\Database\Feature\ModelFeatureService;
 
 class FindService extends Service
 {
@@ -48,9 +48,9 @@ class FindService extends Service
     public static function getArrTraits()
     {
         return [
-            ExpandsTraitService::class,
-            FieldsTraitService::class,
-            ModelTraitService::class,
+            ExpandsFeatureService::class,
+            FieldsFeatureService::class,
+            ModelFeatureService::class,
         ];
     }
 }

@@ -3,11 +3,11 @@
 namespace Illuminate\Extend\Http;
 
 use Illuminate\Support\Arr;
-use Illuminate\Extend\Service\Database\Trait\ModelTraitService;
-use Illuminate\Extend\Service\Database\Trait\OrderByTraitService;
-use Illuminate\Extend\Service\Database\Trait\ExpandsTraitService;
-use Illuminate\Extend\Service\Database\Trait\FieldsTraitService;
-use Illuminate\Extend\Service\Database\Trait\LimitTraitService;
+use Illuminate\Extend\Service\Database\Feature\ModelFeatureService;
+use Illuminate\Extend\Service\Database\Feature\OrderByFeatureService;
+use Illuminate\Extend\Service\Database\Feature\ExpandsFeatureService;
+use Illuminate\Extend\Service\Database\Feature\FieldsFeatureService;
+use Illuminate\Extend\Service\Database\Feature\LimitFeatureService;
 
 class ServiceParameterSettingMiddleware
 {
@@ -32,31 +32,31 @@ class ServiceParameterSettingMiddleware
             $names['token'] = '[token]';
         }
 
-        if ( in_array(ExpandsTraitService::class, $traits) )
+        if ( in_array(ExpandsFeatureService::class, $traits) )
         {
             $data['expands'] = Arr::get($request->all(), 'expands', '');
             $names['expands'] = '[expands]';
         }
 
-        if ( in_array(FieldsTraitService::class, $traits) )
+        if ( in_array(FieldsFeatureService::class, $traits) )
         {
             $data['fields'] = Arr::get($request->all(), 'fields', '');
             $names['fields'] = '[fields]';
         }
 
-        if ( in_array(LimitTraitService::class, $traits) )
+        if ( in_array(LimitFeatureService::class, $traits) )
         {
             $data['limit'] = Arr::get($request->all(), 'limit', '');
             $names['limit'] = '[limit]';
         }
 
-        if ( in_array(ModelTraitService::class, $traits) )
+        if ( in_array(ModelFeatureService::class, $traits) )
         {
             $data['id']  = $request->route('id');
             $names['id'] = $request->route('id');
         }
 
-        if ( in_array(OrderByTraitService::class, $traits) )
+        if ( in_array(OrderByFeatureService::class, $traits) )
         {
             $data['order_by'] = Arr::get($request->all(), 'order_by', '');
             $names['order_by'] = '[order_by]';
