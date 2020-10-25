@@ -3,6 +3,7 @@
 namespace Illuminate\Extend\Http;
 
 use Illuminate\Support\Arr;
+use Illuminate\Extend\Service;
 use Illuminate\Extend\Service\Database\Feature\ModelFeatureService;
 use Illuminate\Extend\Service\Database\Feature\OrderByFeatureService;
 use Illuminate\Extend\Service\Database\Feature\ExpandsFeatureService;
@@ -15,6 +16,12 @@ class ServiceParameterSettingMiddleware
     {
         $response = $next($request);
         $content  = $response->getOriginalContent();
+
+        if ( !Service::isInitable($content) )
+        {
+            return $response;
+        }
+
         $class    = $content[0];
         $data     = Arr::get($content, 1, []);
         $names    = Arr::get($content, 2, []);

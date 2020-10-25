@@ -21,6 +21,16 @@ class ServiceRunMiddleware
 
         $response = $next($request);
         $arr      = $response->getOriginalContent();
+
+        if ( !Service::isInitable($arr) )
+        {
+            $response->setContent([
+                'result' => $arr
+            ]);
+
+            return $response;
+        }
+
         $service  = Service::initService($arr);
         $service->run();
 
