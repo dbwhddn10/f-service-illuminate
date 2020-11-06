@@ -545,9 +545,9 @@ class Service {
 
             return preg_match('/^'.$key.'\\./', $value);
         })->toArray();
-        $callbackKeys = $this->getAllCallbackLists()->get($key, new Collection)->keys()->map(function ($value) use ($key) {
+        $callbackKeys = $this->getAllCallbackLists()->keys()->filter(function ($value) use ($key) {
 
-            return $key.'.'.$value;
+            return preg_match('/^'.$key.'\\./', $value);
         })->toArray();
         $orderedKeys  = $this->getPromiseOrderedDependencies($promiseKeys);
         $restKeys     = array_diff($callbackKeys, $orderedKeys);
