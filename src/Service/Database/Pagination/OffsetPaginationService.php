@@ -17,22 +17,17 @@ class OffsetPaginationService extends Service {
     public static function getArrCallbackLists()
     {
         return [
-            'query.skip' => ['query', 'skip', function ($query, $skip) {
+            'query.skip' => function ($query, $skip) {
 
                 $query->skip($skip);
-            }],
+            },
         ];
     }
 
     public static function getArrLoaders()
     {
         return [
-            'skip' => ['limit', 'page', function ($limit, $page) {
-
-                return ( $page - 1 ) * $limit;
-            }],
-
-            'result' => ['limit', 'page', 'query', 'select_query', function ($limit, $page, $query, $selectQuery) {
+            'result' => function ($limit, $page, $query, $selectQuery) {
 
                 $query = (clone $query)->toBase();
                 $query->limit = null;
@@ -48,15 +43,20 @@ class OffsetPaginationService extends Service {
                         'pageName' => 'page',
                     ]
                 ]);
-            }],
+            },
 
-            'select_query' => ['query', function ($query) {
+            'select_query' => function ($query) {
 
                 return [SelectQueryService::class, [
                     'query'
                         => $query,
                 ]];
-            }],
+            },
+
+            'skip' => function ($limit, $page) {
+
+                return ( $page - 1 ) * $limit;
+            },
         ];
     }
 

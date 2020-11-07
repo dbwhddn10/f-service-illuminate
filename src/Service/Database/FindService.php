@@ -22,10 +22,10 @@ class FindService extends Service
     public static function getArrLoaders()
     {
         return [
-            'result' => ['model', function ($model) {
+            'result' => function ($model) {
 
                 return $model;
-            }],
+            },
         ];
     }
 

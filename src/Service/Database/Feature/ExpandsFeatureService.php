@@ -20,7 +20,7 @@ class ExpandsFeatureService extends Service
     public static function getArrCallbackLists()
     {
         return [
-            'result.expands' => ['expands', 'result', function ($expands, $result) {
+            'result.expands' => function ($expands, $result) {
 
                 if ( $result instanceof Model )
                 {
@@ -34,17 +34,17 @@ class ExpandsFeatureService extends Service
                 }
 
                 $collection->loadVisible($expands);
-            }],
+            },
         ];
     }
 
     public static function getArrLoaders()
     {
         return [
-            'available_expands' => [function () {
+            'available_expands' => function () {
 
                 throw new \Exception;
-            }],
+            },
         ];
     }
 

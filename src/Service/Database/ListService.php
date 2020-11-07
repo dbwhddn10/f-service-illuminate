@@ -22,10 +22,10 @@ class ListService extends Service
     public static function getArrLoaders()
     {
         return [
-            'result' => ['query', function ($query) {
+            'result' => function ($query) {
 
                 return $query->get();
-            }],
+            },
         ];
     }
 

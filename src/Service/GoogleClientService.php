@@ -21,7 +21,7 @@ class GoogleClientService extends Service
     public static function getArrLoaders()
     {
         return [
-            'result' => ['token', 'credential', function ($token, $credential) {
+            'result' => function ($credential, $token) {
 
                 $client     = new Google_Client;
                 $created    = (int) $token['created'];
@@ -39,7 +39,7 @@ class GoogleClientService extends Service
                 }
 
                 return $client;
-            }],
+            },
         ];
     }
 

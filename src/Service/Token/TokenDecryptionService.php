@@ -30,7 +30,7 @@ class TokenDecryptionService extends Service
     public static function getArrLoaders()
     {
         return [
-            'decrypter' => [function () {
+            'decrypter' => function () {
 
                 $keyEncryptionAlgorithmManager = new AlgorithmManager([
                     new A128GCMKW,
@@ -47,9 +47,9 @@ class TokenDecryptionService extends Service
                     $contentEncryptionAlgorithmManager,
                     $compressionMethodManager
                 );
-            }],
+            },
 
-            'jwk' => [function () {
+            'jwk' => function () {
 
                 return new JWK([
                     'alg'
@@ -61,28 +61,28 @@ class TokenDecryptionService extends Service
                     'k'
                         => 'I2FeeR3Th6FmhgHN-cxd-9GRRiwcNB2OQzW6vouGFd5hcAwNAu1377hvDmGLKttBitlHiFzk643FyHw4XFM9tdJ90s2zmkX3SsE2KX5B1Qe_sEhqYmWZsJyjeyx-Q0w4B2jX7b39GUybimHUoVHDPTUrgPUKeBf-xVIGJCvHyiE'
                 ]);
-            }],
+            },
 
-            'payload' => ['decrypter', 'jwk', 'token', function ($decrypter, $jwk, $token) {
+            'payload' => function ($decrypter, $jwk, $token) {
 
                 $jwe = (new CompactSerializer)->unserialize($token);
 
                 $decrypter->decryptUsingKey($jwe, $jwk, 0);
 
                 return json_decode($jwe->getPayLoad(), true);
-            }],
+            },
 
-            'payload_keys' => [function () {
+            'payload_keys' => function () {
 
                 throw new \Exception;
-            }],
+            },
 
-            'result' => ['payload', function ($payload) {
+            'result' => function ($payload) {
 
                 return $payload;
-            }],
+            },
 
-            'valid_token' => ['decrypter', 'jwk', 'payload_keys', 'token', function ($decrypter, $jwk, $payloadKeys, $token) {
+            'valid_token' => function ($decrypter, $jwk, $payloadKeys, $token) {
 
                 try
                 {
@@ -112,7 +112,7 @@ class TokenDecryptionService extends Service
                 }
 
                 return $isValid ? $token : null;
-            }],
+            },
         ];
     }
 

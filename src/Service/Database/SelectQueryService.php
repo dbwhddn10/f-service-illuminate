@@ -19,7 +19,7 @@ class SelectQueryService extends Service
     public static function getArrLoaders()
     {
         return [
-            'result' => ['query', function ($query) {
+            'result' => function ($query) {
 
                 $columns     = $query->getQuery()->columns;
                 $model       = $query->getModel();
@@ -44,7 +44,7 @@ class SelectQueryService extends Service
                 }
 
                 return $selectQuery;
-            }],
+            },
         ];
     }
 

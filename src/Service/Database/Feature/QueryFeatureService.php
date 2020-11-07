@@ -19,15 +19,15 @@ class QueryFeatureService extends Service
     public static function getArrLoaders()
     {
         return [
-            'model_class' => [function () {
+            'model_class' => function () {
 
                 throw new \Exception;
-            }],
+            },
 
-            'query' => ['model_class', function ($modelClass) {
+            'query' => function ($modelClass) {
 
                 return $modelClass::query();
-            }],
+            },
         ];
     }
 

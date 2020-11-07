@@ -15,20 +15,20 @@ class DeleteService extends Service
     public static function getArrCallbackLists()
     {
         return [
-            'result.model' => ['model', function ($model) {
+            'result.model' => function ($model) {
 
                 $model->delete();
-            }],
+            },
         ];
     }
 
     public static function getArrLoaders()
     {
         return [
-            'result' => [function () {
+            'result' => function () {
 
                 return null;
-            }],
+            },
         ];
     }
 

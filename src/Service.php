@@ -2,6 +2,7 @@
 
 namespace Illuminate\Extend;
 
+use Closure;
 use Illuminate\Contracts\Support\Arrayable;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Extend\Validator;
@@ -205,9 +206,9 @@ class Service {
 
     public static function initService($value)
     {
-        $value = array_add($value, 1, []);
-        $value = array_add($value, 2, []);
-        $value = array_add($value, 3, []);
+        $value = Arr::add($value, 1, []);
+        $value = Arr::add($value, 2, []);
+        $value = Arr::add($value, 3, []);
 
         $class  = $value[0];
         $data   = $value[1];
@@ -265,7 +266,7 @@ class Service {
 
             if ( static::isInitable($value) )
             {
-                $value = array_add($value, 2, []);
+                $value = Arr::add($value, 2, []);
 
                 foreach ( $value[2] as $k => $name )
                 {
@@ -347,6 +348,35 @@ class Service {
         return $matches[1];
     }
 
+    protected function getClosureDependencies($func)
+    {
+        if ( !is_object($func) || !($func instanceof \Closure) )
+        {
+            return [];
+        }
+
+        $deps   = [];
+        $params = (new \ReflectionFunction($func))->getParameters();
+
+        foreach ( $params as $i => $param )
+        {
+            $deps[] = strtolower(
+                preg_replace(
+                    [
+                        '#([A-Z][a-z]*)(\d+[A-Z][a-z]*\d+)#',
+                        '#([A-Z]+\d*)([A-Z])#',
+                        '#([a-z]+\d*)([A-Z])#',
+                        '#([^_\d])([A-Z][a-z])#'
+                    ],
+                    '$1_$2',
+                    $param->name
+                )
+            );
+        }
+
+        return $deps;
+    }
+
     protected function getPromiseOrderedDependencies($keys)
     {
         $arr  = [];
@@ -368,10 +398,10 @@ class Service {
         return array_keys($rtn);
     }
 
-    protected function resolve(array $arr = [])
+    protected function resolve($func)
     {
-        $resolver = \Closure::bind(array_last($arr), $this);
-        $depNames = array_slice($arr, 0, -1);
+        $resolver = \Closure::bind($func, $this);
+        $depNames = $this->getClosureDependencies($func);
         $depVals  = [];
         $params   = (new \ReflectionFunction($resolver))->getParameters();
 
@@ -499,8 +529,8 @@ class Service {
             }
         }
 
-        $loader = $this->getAllLoaders()->get($key, []);
-        $deps   = array_slice($loader, 0, -1);
+        $loader = $this->getAllLoaders()->get($key);
+        $deps   = $this->getClosureDependencies($loader);
 
         foreach ( $deps as $dep )
         {
@@ -559,7 +589,7 @@ class Service {
         foreach ( $callbackKeys as $callbackKey )
         {
             $callback = $this->getAllCallbackLists()->get($callbackKey);
-            $deps     = array_slice($callback, 0, -1);
+            $deps     = $this->getClosureDependencies($callback);
 
             foreach ( $deps as $dep )
             {

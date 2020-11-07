@@ -15,20 +15,20 @@ class ModelFeatureService extends Service
     public static function getArrCallbackLists()
     {
         return [
-            'query.id' => ['id', 'query', function ($id, $query) {
+            'query.id' => function ($id, $query) {
 
                 $query->where($query->getModel()->getKeyName(), $id);
-            }],
+            },
         ];
     }
 
     public static function getArrLoaders()
     {
         return [
-            'model' => ['query', function ($query) {
+            'model' => function ($query) {
 
                 return $query->first();
-            }]
+            },
         ];
     }
 

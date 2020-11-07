@@ -19,7 +19,7 @@ class CursorPaginationService extends Service
     public static function getArrLoaders()
     {
         return [
-            'result' => ['cursor', 'limit', 'query', 'order_by_array', function ($cursor='', $limit='', $query, $orderByArray) {
+            'result' => function ($cursor='', $limit='', $orderByArray, $query) {
 
                 $wheres = [];
                 $result = [];
@@ -66,7 +66,7 @@ class CursorPaginationService extends Service
                 while ( $limit != 0 && count($wheres) != 0 );
 
                 return $query->getModel()->newCollection($result);
-            }]
+            },
         ];
     }
 

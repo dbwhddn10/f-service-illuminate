@@ -27,7 +27,7 @@ class TokenEncryptionService extends Service
     public static function getArrLoaders()
     {
         return [
-            'encrypter' => [function () {
+            'encrypter' => function () {
 
                 $keyEncryptionAlgorithmManager = new AlgorithmManager([
                     new A128GCMKW,
@@ -44,9 +44,9 @@ class TokenEncryptionService extends Service
                     $contentEncryptionAlgorithmManager,
                     $compressionMethodManager
                 );
-            }],
+            },
 
-            'jwk' => [function () {
+            'jwk' => function () {
 
                 return new JWK([
                     'alg'
@@ -58,19 +58,19 @@ class TokenEncryptionService extends Service
                     'k'
                         => 'I2FeeR3Th6FmhgHN-cxd-9GRRiwcNB2OQzW6vouGFd5hcAwNAu1377hvDmGLKttBitlHiFzk643FyHw4XFM9tdJ90s2zmkX3SsE2KX5B1Qe_sEhqYmWZsJyjeyx-Q0w4B2jX7b39GUybimHUoVHDPTUrgPUKeBf-xVIGJCvHyiE'
                 ]);
-            }],
+            },
 
-            'payload' => [function () {
+            'payload' => function () {
 
                 throw new \Exception;
-            }],
+            },
 
-            'result' => ['token', function ($token) {
+            'result' => function ($token) {
 
                 return $token;
-            }],
+            },
 
-            'token' => ['encrypter', 'jwk', 'payload', function ($encrypter, $jwk, $payload) {
+            'token' => function ($encrypter, $jwk, $payload) {
 
                 $jwe = $encrypter
                     ->create()
@@ -84,7 +84,7 @@ class TokenEncryptionService extends Service
                     ->build();
 
                 return (new CompactSerializer)->serialize($jwe, 0);
-            }],
+            },
         ];
     }
 

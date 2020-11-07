@@ -25,12 +25,12 @@ class PaginationListService extends Service
     public static function getArrLoaders()
     {
         return [
-            'cursor' => ['model_class', 'cursor_id', function ($modelClass='', $cursorId='') {
+            'cursor' => function ($cursorId='', $modelClass='') {
 
                 throw new \Exception;
-            }],
+            },
 
-            'result' => ['cursor', 'limit', 'order_by_array', 'page', 'query', function ($cursor='', $limit, $orderByArray='', $page='', $query) {
+            'result' => function ($cursor='', $limit, $orderByArray='', $page='', $query) {
 
                 if ( $page !== '' )
                 {
@@ -59,7 +59,7 @@ class PaginationListService extends Service
                             => $query,
                     ]];
                 }
-            }]
+            },
         ];
     }
 

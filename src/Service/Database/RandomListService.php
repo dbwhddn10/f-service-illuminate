@@ -17,28 +17,28 @@ class RandomListService extends Service
     public static function getArrCallbackLists()
     {
         return [
-            'query.order_by' => ['query', function ($query) {
+            'query.order_by' => function ($query) {
 
                 $query->orderByRaw('RAND()');
-            }],
+            },
         ];
     }
 
     public static function getArrLoaders()
     {
         return [
-            'select_query' => ['query', function ($query) {
+            'result' => function ($selectQuery) {
+
+                return $selectQuery->get();
+            },
+
+            'select_query' => function ($query) {
 
                 return [SelectQueryService::class, [
                     'query'
                         => $query
                 ]];
-            }],
-
-            'result' => ['select_query', function ($selectQuery) {
-
-                return $selectQuery->get();
-            }],
+            },
         ];
     }
 

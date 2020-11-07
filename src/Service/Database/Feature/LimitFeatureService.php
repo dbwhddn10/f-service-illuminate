@@ -15,20 +15,20 @@ class LimitFeatureService extends Service
     public static function getArrCallbackLists()
     {
         return [
-            'query.limit' => ['limit', 'query', function ($limit, $query) {
+            'query.limit' => function ($limit, $query) {
 
                 $query->take($limit);
-            }],
+            },
         ];
     }
 
     public static function getArrLoaders()
     {
         return [
-            'limit' => [function () {
+            'limit' => function () {
 
                 return 30;
-            }],
+            },
         ];
     }
 

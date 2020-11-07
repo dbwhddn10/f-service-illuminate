@@ -18,24 +18,24 @@ class FieldsFeatureService extends Service
     public static function getArrCallbackLists()
     {
         return [
-            'query.fields' => ['available_fields', 'fields', 'query', function ($availableFields, $fields='', $query) {
+            'query.fields' => function ($availableFields, $fields='', $query) {
 
                 $fields = $fields ? preg_split('/\s*,\s*/', $fields) : $availableFields;
 
                 $query->select($fields);
-            }],
+            },
         ];
     }
 
     public static function getArrLoaders()
     {
         return [
-            'available_fields' => ['model_class', function ($modelClass) {
+            'available_fields' => function ($modelClass) {
 
                 $model = new $modelClass;
 
                 return array_merge($model->getFillable(), $model->getGuarded());
-            }],
+            },
         ];
     }
 

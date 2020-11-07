@@ -18,20 +18,20 @@ class OrderByFeatureService extends Service
     public static function getArrCallbackLists()
     {
         return [
-            'query.order_by_array' => ['order_by_array', 'query', function ($orderByArray, $query) {
+            'query.order_by_array' => function ($orderByArray, $query) {
 
                 foreach ( $orderByArray as $key => $direction )
                 {
                     $query->orderBy($key, $direction);
                 }
-            }],
+            },
         ];
     }
 
     public static function getArrLoaders()
     {
         return [
-            'available_order_by' => ['model_class', function ($modelClass) {
+            'available_order_by' => function ($modelClass) {
 
                 if ( $modelClass::CREATED_AT == null )
                 {
@@ -41,9 +41,9 @@ class OrderByFeatureService extends Service
                 {
                     return [$modelClass::CREATED_AT.' desc', $modelClass::CREATED_AT.' asc'];
                 }
-            }],
+            },
 
-            'order_by_array' => ['model_class', 'order_by', function ($modelClass, $orderBy) {
+            'order_by_array' => function ($modelClass, $orderBy) {
 
                 $model   = new $modelClass;
                 $orderBy = preg_replace('/\s+/', ' ', $orderBy);
@@ -65,7 +65,7 @@ class OrderByFeatureService extends Service
                 }
 
                 return $array;
-            }],
+            },
         ];
     }
 
