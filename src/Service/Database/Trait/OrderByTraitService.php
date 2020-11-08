@@ -1,17 +1,15 @@
 <?php
 
-namespace Illuminate\Extend\Service\Query;
+namespace Illuminate\Extend\Service\Database\Trait;
 
 use Illuminate\Extend\Service;
+use Illuminate\Extend\Service\Database\Trait\QueryTraitService;
 
-class OrderQueryService extends Service
+class OrderByTraitService extends Service
 {
     public static function getArrBindNames()
     {
         return [
-            'available_group_by'
-                => 'options for {{group_by}}',
-
             'available_order_by'
                 => 'options for {{order_by}}',
         ];
@@ -20,13 +18,6 @@ class OrderQueryService extends Service
     public static function getArrCallbackLists()
     {
         return [
-            'query.group_by' => ['group_by', 'query', function ($groupBy, $query) {
-
-                $groupBy = preg_split('/\s*,\s*/', $groupBy);
-
-                $query->groupBy($groupBy);
-            }],
-
             'query.order_by_array' => ['order_by_array', 'query', function ($orderByArray, $query) {
 
                 foreach ( $orderByArray as $key => $direction )
@@ -40,11 +31,6 @@ class OrderQueryService extends Service
     public static function getArrLoaders()
     {
         return [
-            'available_group_by' => [function () {
-
-                return [];
-            }],
-
             'available_order_by' => ['model_class', function ($modelClass) {
 
                 if ( $modelClass::CREATED_AT == null )
@@ -91,9 +77,6 @@ class OrderQueryService extends Service
     public static function getArrRuleLists()
     {
         return [
-            'group_by'
-                => ['string', 'in_array:{{available_group_by}}.*'],
-
             'order_by'
                 => ['string', 'in_array:{{available_order_by}}.*'],
         ];
@@ -102,7 +85,7 @@ class OrderQueryService extends Service
     public static function getArrTraits()
     {
         return [
-            SelectQueryService::class
+            QueryTraitService::class,
         ];
     }
 }

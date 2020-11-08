@@ -1,10 +1,13 @@
 <?php
 
-namespace Illuminate\Extend\Service\Query;
+namespace Illuminate\Extend\Service\Database;
 
 use Illuminate\Extend\Service;
+use Illuminate\Extend\Service\Database\Trait\ExpandsTraitService;
+use Illuminate\Extend\Service\Database\Trait\FieldsTraitService;
+use Illuminate\Extend\Service\Database\Trait\OrderByTraitService;
 
-class DeleteService extends Service
+class ListService extends Service
 {
     public static function getArrBindNames()
     {
@@ -13,20 +16,15 @@ class DeleteService extends Service
 
     public static function getArrCallbackLists()
     {
-        return [
-            'result.model' => ['model', function ($model) {
-
-                $model->delete();
-            }],
-        ];
+        return [];
     }
 
     public static function getArrLoaders()
     {
         return [
-            'result' => [function () {
+            'result' => ['query', function ($query) {
 
-                return null;
+                return $query->get();
             }],
         ];
     }
@@ -44,7 +42,9 @@ class DeleteService extends Service
     public static function getArrTraits()
     {
         return [
-            FindService::class,
+            ExpandsTraitService::class,
+            FieldsTraitService::class,
+            OrderByTraitService::class,
         ];
     }
 }

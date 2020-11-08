@@ -1,10 +1,14 @@
 <?php
 
-namespace Illuminate\Extend\Service\Query;
+namespace Illuminate\Extend\Service\Database;
 
 use Illuminate\Extend\Service;
-use Illuminate\Extend\Service\Query\Pagination\CursorPaginationService;
-use Illuminate\Extend\Service\Query\Pagination\OffsetPaginationService;
+use Illuminate\Extend\Service\Database\Pagination\CursorPaginationService;
+use Illuminate\Extend\Service\Database\Pagination\OffsetPaginationService;
+use Illuminate\Extend\Service\Database\Trait\ExpandsTraitService;
+use Illuminate\Extend\Service\Database\Trait\FieldsTraitService;
+use Illuminate\Extend\Service\Database\Trait\LimitTraitService;
+use Illuminate\Extend\Service\Database\Trait\OrderByTraitService;
 
 class PaginationListService extends Service
 {
@@ -21,7 +25,7 @@ class PaginationListService extends Service
     public static function getArrLoaders()
     {
         return [
-            'cursor' => ['model_class', 'cursor_id', function ($modelClass, $cursorId) {
+            'cursor' => ['model_class', 'cursor_id', function ($modelClass='', $cursorId='') {
 
                 throw new \Exception;
             }],
@@ -75,9 +79,10 @@ class PaginationListService extends Service
     public static function getArrTraits()
     {
         return [
-            LimitQueryService::class,
-            OrderQueryService::class,
-            SelectQueryService::class,
+            ExpandsTraitService::class,
+            FieldsTraitService::class,
+            LimitTraitService::class,
+            OrderByTraitService::class,
         ];
     }
 }

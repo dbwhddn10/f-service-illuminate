@@ -1,6 +1,6 @@
 <?php
 
-namespace Illuminate\Extend\Service\Query\Pagination;
+namespace Illuminate\Extend\Service\Database\Pagination;
 
 use Illuminate\Extend\Service;
 

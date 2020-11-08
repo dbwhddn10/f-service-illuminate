@@ -1,34 +1,25 @@
 <?php
 
-namespace Illuminate\Extend\Service\Query;
+namespace Illuminate\Extend\Service\Database\Trait;
 
 use Illuminate\Extend\Collection;
 use Illuminate\Extend\Model;
 use Illuminate\Extend\Service;
+use Illuminate\Extend\Service\Database\Trait\QueryTraitService;
 
-class SelectQueryService extends Service
+class ExpandsTraitService extends Service
 {
     public static function getArrBindNames()
     {
         return [
             'available_expands'
                 => 'options for {{expands}}',
-
-            'available_fields'
-                => 'options for {{fields}}',
         ];
     }
 
     public static function getArrCallbackLists()
     {
         return [
-            'query.fields' => ['available_fields', 'fields', 'query', function ($availableFields, $fields='', $query) {
-
-                $fields = $fields ? preg_split('/\s*,\s*/', $fields) : $availableFields;
-
-                $query->select($fields);
-            }],
-
             'result.expands' => ['expands', 'result', function ($expands, $result) {
 
                 if ( $result instanceof Model )
@@ -50,26 +41,9 @@ class SelectQueryService extends Service
     public static function getArrLoaders()
     {
         return [
-            'available_expands' => ['model_class', function ($modelClass) {
-
-                return (new $modelClass)->getExpandable();
-            }],
-
-            'available_fields' => ['model_class', function ($modelClass) {
-
-                $model = new $modelClass;
-
-                return array_merge($model->getFillable(), $model->getGuarded());
-            }],
-
-            'model_class' => [function () {
+            'available_expands' => [function () {
 
                 throw new \Exception;
-            }],
-
-            'query' => ['model_class', function ($modelClass) {
-
-                return $modelClass::query();
             }],
         ];
     }
@@ -84,14 +58,13 @@ class SelectQueryService extends Service
         return [
             'expands'
                 => ['string', 'several_in:{{available_expands}}'],
-
-            'fields'
-                => ['string', 'several_in:{{available_fields}}'],
         ];
     }
 
     public static function getArrTraits()
     {
-        return [];
+        return [
+            QueryTraitService::class,
+        ];
     }
 }

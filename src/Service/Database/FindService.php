@@ -1,8 +1,11 @@
 <?php
 
-namespace Illuminate\Extend\Service\Query;
+namespace Illuminate\Extend\Service\Database;
 
 use Illuminate\Extend\Service;
+use Illuminate\Extend\Service\Database\Trait\ExpandsTraitService;
+use Illuminate\Extend\Service\Database\Trait\FieldsTraitService;
+use Illuminate\Extend\Service\Database\Trait\ModelTraitService;
 
 class FindService extends Service
 {
@@ -13,25 +16,15 @@ class FindService extends Service
 
     public static function getArrCallbackLists()
     {
-        return [
-            'query.id' => ['id', 'query', function ($id, $query) {
-
-                $query->where($query->getModel()->getKeyName(), $id);
-            }],
-        ];
+        return [];
     }
 
     public static function getArrLoaders()
     {
         return [
-            'model' => ['result', function ($result) {
+            'result' => ['model', function ($model) {
 
-                return $result;
-            }],
-
-            'result' => ['query', function ($query) {
-
-                return $query->get()->first();
+                return $model;
             }],
         ];
     }
@@ -55,7 +48,9 @@ class FindService extends Service
     public static function getArrTraits()
     {
         return [
-            SelectQueryService::class,
+            ExpandsTraitService::class,
+            FieldsTraitService::class,
+            ModelTraitService::class,
         ];
     }
 }

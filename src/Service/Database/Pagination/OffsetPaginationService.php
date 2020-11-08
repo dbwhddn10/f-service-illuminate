@@ -1,10 +1,11 @@
 <?php
 
-namespace Illuminate\Extend\Service\Query\Pagination;
+namespace Illuminate\Extend\Service\Database\Pagination;
 
 use Illuminate\Extend\Service;
 use Illuminate\Pagination\Paginator;
 use Illuminate\Pagination\LengthAwarePaginator;
+use Illuminate\Extend\Service\Database\SelectQueryService;
 
 class OffsetPaginationService extends Service {
 
@@ -51,29 +52,10 @@ class OffsetPaginationService extends Service {
 
             'select_query' => ['query', function ($query) {
 
-                $columns     = $query->getQuery()->columns;
-                $model       = $query->getModel();
-                $selectQuery = $model->query();
-                $query       = (clone $query)->select($model->getKeyName());
-                $ids         = $query->get()->modelKeys();
-
-                $selectQuery->getQuery()->select($columns);
-                $selectQuery->whereIn($model->getKeyName(), $ids);
-
-                if ( ! empty($ids) )
-                {
-                    if ( $model->getKeyType() == 'string' )
-                    {
-                        foreach ( $ids as $i => $id )
-                        {
-                            $ids[$i] = '\''.$id.'\'';
-                        }
-                    }
-
-                    $selectQuery->orderByRaw('FIELD('.$model->getKeyName().','.implode(',', $ids).')');
-                }
-
-                return $selectQuery;
+                return [SelectQueryService::class, [
+                    'query'
+                        => $query,
+                ]];
             }],
         ];
     }

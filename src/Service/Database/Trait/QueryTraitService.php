@@ -1,10 +1,10 @@
 <?php
 
-namespace Illuminate\Extend\Service\Query;
+namespace Illuminate\Extend\Service\Database\Trait;
 
 use Illuminate\Extend\Service;
 
-class LimitQueryService extends Service
+class QueryTraitService extends Service
 {
     public static function getArrBindNames()
     {
@@ -13,20 +13,20 @@ class LimitQueryService extends Service
 
     public static function getArrCallbackLists()
     {
-        return [
-            'query.limit' => ['limit', 'query', function ($limit, $query) {
-
-                $query->take($limit);
-            }],
-        ];
+        return [];
     }
 
     public static function getArrLoaders()
     {
         return [
-            'limit' => [function () {
+            'model_class' => [function () {
 
-                return 30;
+                throw new \Exception;
+            }],
+
+            'query' => ['model_class', function ($modelClass) {
+
+                return $modelClass::query();
             }],
         ];
     }
@@ -38,10 +38,7 @@ class LimitQueryService extends Service
 
     public static function getArrRuleLists()
     {
-        return [
-            'limit'
-                => ['required', 'integer', 'max:120', 'min:1'],
-        ];
+        return [];
     }
 
     public static function getArrTraits()
