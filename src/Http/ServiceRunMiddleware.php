@@ -5,6 +5,7 @@ namespace Illuminate\Extend\Http;
 use Illuminate\Database\Eloquent\Relations\Relation;
 use Illuminate\Extend\Model;
 use Illuminate\Extend\Service;
+use Illuminate\Http\Response;
 use Illuminate\Pagination\AbstractPaginator;
 use Illuminate\Support\Collection;
 use Illuminate\Support\Facades\DB;
@@ -21,10 +22,11 @@ class ServiceRunMiddleware
 
         $response = $next($request);
         $arr      = $response->getOriginalContent();
+        $setData  = get_class($response) == Response::class ? 'setContent': 'setData';
 
         if ( !Service::isInitable($arr) )
         {
-            $response->setContent([
+            $response->{$setData}([
                 'result' => $arr
             ]);
 
@@ -57,7 +59,7 @@ class ServiceRunMiddleware
 
         if ( $errors->isEmpty() )
         {
-            $response->setContent([
+            $response->{$setData}([
                 'result' => $data
             ]);
 
@@ -65,7 +67,7 @@ class ServiceRunMiddleware
         }
         else
         {
-            $response->setContent([
+            $response->{$setData}([
                 'errors' => $errors
             ]);
 
