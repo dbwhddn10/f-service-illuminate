@@ -43,6 +43,18 @@ class OrderByFeatureService extends Service
                 }
             },
 
+            'order_by' => function ($modelClass) {
+
+                if ( $modelClass::CREATED_AT == null )
+                {
+                    return (new $modelClass)->getKeyName().' desc';
+                }
+                else
+                {
+                    return $modelClass::CREATED_AT.' desc';
+                }
+            },
+
             'order_by_array' => function ($modelClass, $orderBy) {
 
                 $model   = new $modelClass;
