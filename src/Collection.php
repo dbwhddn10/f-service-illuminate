@@ -8,7 +8,7 @@ class Collection extends \Illuminate\Database\Eloquent\Collection {
 
     public function loadVisible($list)
     {
-        $list = is_array($list) ? $list : func_get_args();
+        $list = is_array($list) ? $list : explode(',', $list);
         $relations = [];
 
         foreach ( $list as $key )
