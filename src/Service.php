@@ -184,7 +184,8 @@ class Service {
         $factory = app(ValidationFactory::class);
         $factory->resolver(function ($tr, array $data, array $rules, array $messages, array $names) {
 
-            return new Validator($tr, $data, $rules, $messages, $names);
+            $class = preg_replace('/Service$/', 'Validator', static::class);
+            return new $class($tr, $data, $rules, $messages, $names);
         });
 
         foreach ( $ruleList as $key => $rules )
