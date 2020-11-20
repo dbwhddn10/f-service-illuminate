@@ -182,9 +182,9 @@ class Service {
     protected function getValidationErrors($data, $ruleList)
     {
         $factory = app(ValidationFactory::class);
-        $factory->resolver(function ($tr, array $data, array $rules, array $messages, array $names) {
-
-            $class = preg_replace('/Service$/', 'Validator', static::class);
+        $factory->resolver(function ($tr, array $data, array $rules, array $messages, array $names)
+        {
+            $class = preg_replace('/Service$/', 'Validator', self::class);
             return new $class($tr, $data, $rules, $messages, $names);
         });
 
