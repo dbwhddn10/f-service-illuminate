@@ -77,7 +77,7 @@ class ServiceParameterSettingMiddleware
             $names['page']      = '[page]';
         }
 
-        $response->setContent([$class, $data, $names]);
+        $response->{Arr::last(explode('\\', get_class($response))) == 'Response' ? 'setContent': 'setData'}([$class, $data, $names]);
 
         return $response;
     }

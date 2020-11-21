@@ -10,6 +10,7 @@ use Illuminate\Pagination\AbstractPaginator;
 use Illuminate\Support\Collection;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Request;
+use Illuminate\Support\Arr;
 
 class ServiceRunMiddleware
 {
@@ -22,11 +23,10 @@ class ServiceRunMiddleware
 
         $response = $next($request);
         $arr      = $response->getOriginalContent();
-        $setData  = get_class($response) == Response::class ? 'setContent': 'setData';
 
         if ( !Service::isInitable($arr) )
         {
-            $response->{$setData}([
+            $response->{Arr::last(explode('\\', get_class($response))) == 'Response' ? 'setContent': 'setData'}([
                 'result' => $arr
             ]);
 
@@ -59,7 +59,7 @@ class ServiceRunMiddleware
 
         if ( $errors->isEmpty() )
         {
-            $response->{$setData}([
+            $response->{Arr::last(explode('\\', get_class($response))) == 'Response' ? 'setContent': 'setData'}([
                 'result' => $data
             ]);
 
@@ -67,7 +67,7 @@ class ServiceRunMiddleware
         }
         else
         {
-            $response->{$setData}([
+            $response->{Arr::last(explode('\\', get_class($response))) == 'Response' ? 'setContent': 'setData'}([
                 'errors' => $errors
             ]);
 
