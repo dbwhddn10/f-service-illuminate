@@ -36,13 +36,7 @@ class FindService extends Service
 
     public static function getArrRuleLists()
     {
-        return [
-            'id'
-                => ['required', 'integer'],
-
-            'model'
-                => ['not_null']
-        ];
+        return [];
     }
 
     public static function getArrTraits()
