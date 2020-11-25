@@ -9,7 +9,10 @@ class ModelFeatureService extends Service
 {
     public static function getArrBindNames()
     {
-        return [];
+        return [
+            'model'
+                => 'model for {{id}}',
+        ];
     }
 
     public static function getArrCallbackLists()
