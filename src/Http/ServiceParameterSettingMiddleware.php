@@ -59,8 +59,8 @@ class ServiceParameterSettingMiddleware
 
         if ( in_array(ModelFeatureService::class, $traits) )
         {
-            $data['id']  = $request->route('id');
-            $names['id'] = $request->route('id');
+            $data['id']  = $request->route('id') ? $request->route('id') : '';
+            $names['id'] = $request->route('id') ? $request->route('id') : '';
         }
 
         if ( in_array(OrderByFeatureService::class, $traits) )
