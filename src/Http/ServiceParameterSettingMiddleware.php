@@ -9,6 +9,7 @@ use Illuminate\Extend\Service\Database\Feature\OrderByFeatureService;
 use Illuminate\Extend\Service\Database\Feature\ExpandsFeatureService;
 use Illuminate\Extend\Service\Database\Feature\FieldsFeatureService;
 use Illuminate\Extend\Service\Database\Feature\LimitFeatureService;
+use Illuminate\Extend\Service\Database\PaginationListService;
 
 class ServiceParameterSettingMiddleware
 {
@@ -39,42 +40,46 @@ class ServiceParameterSettingMiddleware
             $names['token'] = '[token]';
         }
 
-        if ( in_array(ExpandsFeatureService::class, $traits) )
+        if ( in_array(ExpandsFeatureService::class, $traits) && $request->offsetExists('expands') )
         {
-            $data['expands'] = Arr::get($request->all(), 'expands', '');
+            $data['expands']  = Arr::get($request->all(), 'expands', '');
             $names['expands'] = '[expands]';
         }
 
-        if ( in_array(FieldsFeatureService::class, $traits) )
+        if ( in_array(FieldsFeatureService::class, $traits) && $request->offsetExists('fields') )
         {
-            $data['fields'] = Arr::get($request->all(), 'fields', '');
+            $data['fields']  = Arr::get($request->all(), 'fields', '');
             $names['fields'] = '[fields]';
         }
 
-        if ( in_array(LimitFeatureService::class, $traits) )
+        if ( in_array(LimitFeatureService::class, $traits) && $request->offsetExists('limit') )
         {
-            $data['limit'] = Arr::get($request->all(), 'limit', '');
+            $data['limit']  = Arr::get($request->all(), 'limit', '');
             $names['limit'] = '[limit]';
         }
 
-        if ( in_array(ModelFeatureService::class, $traits) )
+        if ( in_array(ModelFeatureService::class, $traits) && $request->route('id') )
         {
             $data['id']  = $request->route('id');
             $names['id'] = $request->route('id');
         }
 
-        if ( in_array(OrderByFeatureService::class, $traits) )
+        if ( in_array(OrderByFeatureService::class, $traits) && $request->offsetExists('order_by') )
         {
-            $data['order_by'] = Arr::get($request->all(), 'order_by', '');
+            $data['order_by']  = Arr::get($request->all(), 'order_by', '');
             $names['order_by'] = '[order_by]';
         }
 
-        if ( array_key_exists('cursor', $loaders) )
+        if ( in_array(PaginationListService::class, $traits) && $request->offsetExists('cursor_id') )
         {
             $data['cursor_id']  = Arr::get($request->all(), 'cursor_id', '');
-            $data['page']       = Arr::get($request->all(), 'page', '');
             $names['cursor_id'] = '[cursor_id]';
-            $names['page']      = '[page]';
+        }
+
+        if ( in_array(PaginationListService::class, $traits) && $request->offsetExists('page') )
+        {
+            $data['page']  = Arr::get($request->all(), 'page', '');
+            $names['page'] = '[page]';
         }
 
         $response->{Arr::last(explode('\\', get_class($response))) == 'Response' ? 'setContent': 'setData'}([$class, $data, $names]);
