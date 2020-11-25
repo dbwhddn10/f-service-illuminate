@@ -144,8 +144,6 @@ class Service {
         $arr = array_merge($arr, static::getArrTraits());
         $arr = array_unique($arr);
 
-        sort($arr);
-
         return new Collection($arr);
     }
 
