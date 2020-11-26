@@ -6,6 +6,7 @@ use Illuminate\Extend\Collection;
 use Illuminate\Extend\Model;
 use Illuminate\Extend\Service;
 use Illuminate\Extend\Service\Database\Feature\QueryFeatureService;
+use Illuminate\Pagination\LengthAwarePaginator;
 
 class ExpandsFeatureService extends Service
 {
@@ -31,6 +32,14 @@ class ExpandsFeatureService extends Service
                 else if ( $result instanceof Collection )
                 {
                     $collection = $result;
+                }
+                else if ( $result instanceof LengthAwarePaginator )
+                {
+                    $collection = $result->getCollection();
+                }
+                else
+                {
+                    throw new \Exception;
                 }
 
                 $collection->loadVisible($expands);
