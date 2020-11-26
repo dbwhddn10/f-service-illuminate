@@ -517,8 +517,9 @@ class Service {
 
         foreach ( $promiseList as $promise )
         {
-            $promiseKey = explode(':', $promise)[0];
-            $isStrict   = explode(':', $promise)[1] == 'strict';
+            $segs       = explode(':', $promise);
+            $promiseKey = $segs[0];
+            $isStrict   = isset($segs[1]) && $segs[1] == 'strict';
 
             if ( !$this->validate($promiseKey) && $isStrict )
             {
