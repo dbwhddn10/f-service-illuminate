@@ -30,7 +30,7 @@ class ServiceParameterSettingMiddleware
 
         if ( $request->bearerToken() && ! $request->offsetExists('token') )
         {
-            $data['token']  = $segs[1];
+            $data['token']  = $request->bearerToken();
             $names['token'] = 'header[authorization]';
         }
         else if ( $request->offsetExists('token') )
