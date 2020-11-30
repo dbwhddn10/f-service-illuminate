@@ -28,15 +28,15 @@ class ServiceParameterSettingMiddleware
         $traits   = $class::getAllTraits()->all();
         $loaders  = $class::getAllLoaders()->all();
 
-        if ( $request->bearerToken() && ! $request->offsetExists('token') )
-        {
-            $data['token']  = $request->bearerToken();
-            $names['token'] = 'header[authorization]';
-        }
-        else if ( $request->offsetExists('token') )
+        if ( $request->offsetExists('token') )
         {
             $data['token']  = $request->offsetGet('token');
             $names['token'] = '[token]';
+        }
+        else
+        {
+            $data['token']  = $request->bearerToken() ? : '';
+            $names['token'] = 'header[authorization]';
         }
 
         if ( in_array(ExpandsFeatureService::class, $traits) )
