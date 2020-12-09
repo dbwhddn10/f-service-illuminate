@@ -27,7 +27,7 @@ class DeleteService extends Service
         return [
             'result' => function () {
 
-                return null;
+                return '';
             },
         ];
     }
