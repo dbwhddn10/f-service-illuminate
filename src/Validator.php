@@ -90,6 +90,7 @@ class Validator extends \Illuminate\Validation\Validator {
         $image = base64_decode($value);
         $f = finfo_open();
         $mime = finfo_buffer($f, $image, FILEINFO_MIME_TYPE);
+        finfo_close($f);
 
         return in_array($mime, ['image/png', 'image/jpeg', 'image/gif', 'image/webp', 'image/svg+xml']);
     }
