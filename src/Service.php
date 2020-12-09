@@ -278,7 +278,7 @@ class Service {
                 $this->childs->put($key, $service);
             }
 
-            if ( ! $this->isResolveError($value) && $value !== '' )
+            if ( ! $this->isResolveError($value) )
             {
                 $data->put($key, $value);
             }
