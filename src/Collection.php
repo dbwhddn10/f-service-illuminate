@@ -57,44 +57,5 @@ class Collection extends \Illuminate\Database\Eloquent\Collection {
         }
     }
 
-    // public function loadVisible($relations)
-    // {
-    //     $relations = is_array($relations) ? $relations : func_get_args();
-
-    //     foreach ( $relations as $relation )
-    //     {
-    //         $collect = $this;
-    //         $rels  = explode('.', $relation);
-
-    //         while (!empty($rels))
-    //         {
-    //             $models = [];
-
-    //             foreach ( $collect as $item )
-    //             {
-    //                 if ( is_a($item, static::class) )
-    //                 {
-    //                     $models = array_merge($models, $item->all());
-    //                 }
-    //                 else
-    //                 {
-    //                     array_push($models, $item);
-    //                 }
-    //             }
-
-    //             if ( empty($models) )
-    //             {
-    //                 break;
-    //             }
-
-    //             $rel     = array_shift($rels);
-    //             $model   = $models[0]->{$rel}()->getModel();
-    //             $columns = array_diff(array_merge($model->getFillable(), $model->getGuarded()), $model->getHidden());
-    //             $collect = new static($models);
-    //             $collect->load($rel.':'.implode(',', $columns));
-    //             $collect = new static($collect->pluck($rel)->all());
-    //         }
-    //     }
-    // }
 }
 
