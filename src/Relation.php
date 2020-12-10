@@ -1,11 +1,11 @@
 <?php
 
-namespace Illuminate\Extend;
+namespace Dbwhddn10\Illuminate;
 
 use Closure;
+use Dbwhddn10\Illuminate\Model;
+use Dbwhddn10\Illuminate\Query;
 use Illuminate\Database\Eloquent\Collection;
-use Illuminate\Extend\Model;
-use Illuminate\Extend\Query;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
 

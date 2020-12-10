@@ -1,10 +1,10 @@
 <?php
 
-namespace Illuminate\Extend;
+namespace Dbwhddn10\Illuminate;
 
 use Closure;
-use Illuminate\Extend\Collection;
-use Illuminate\Extend\Relation;
+use Dbwhddn10\Illuminate\Collection;
+use Dbwhddn10\Illuminate\Relation;
 
 class Model extends \Illuminate\Database\Eloquent\Model
 {

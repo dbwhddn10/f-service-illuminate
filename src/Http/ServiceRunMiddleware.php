@@ -1,10 +1,10 @@
 <?php
 
-namespace Illuminate\Extend\Http;
+namespace Dbwhddn10\Illuminate\Http;
 
+use Dbwhddn10\Illuminate\Model;
+use Dbwhddn10\Illuminate\Service;
 use Illuminate\Database\Eloquent\Relations\Relation;
-use Illuminate\Extend\Model;
-use Illuminate\Extend\Service;
 use Illuminate\Http\Response;
 use Illuminate\Pagination\AbstractPaginator;
 use Illuminate\Support\Collection;

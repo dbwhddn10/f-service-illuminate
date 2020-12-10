@@ -1,14 +1,14 @@
 <?php
 
-namespace Illuminate\Extend\Http;
+namespace Dbwhddn10\Illuminate\Http;
 
 use Illuminate\Support\Arr;
-use Illuminate\Extend\Service;
-use Illuminate\Extend\Service\Database\Feature\ModelFeatureService;
-use Illuminate\Extend\Service\Database\Feature\OrderByFeatureService;
-use Illuminate\Extend\Service\Database\Feature\ExpandsFeatureService;
-use Illuminate\Extend\Service\Database\Feature\FieldsFeatureService;
-use Illuminate\Extend\Service\Database\Feature\LimitFeatureService;
+use Dbwhddn10\Illuminate\Service;
+use Dbwhddn10\Illuminate\Service\Database\Feature\ModelFeatureService;
+use Dbwhddn10\Illuminate\Service\Database\Feature\OrderByFeatureService;
+use Dbwhddn10\Illuminate\Service\Database\Feature\ExpandsFeatureService;
+use Dbwhddn10\Illuminate\Service\Database\Feature\FieldsFeatureService;
+use Dbwhddn10\Illuminate\Service\Database\Feature\LimitFeatureService;
 
 class ServiceParameterSettingMiddleware
 {

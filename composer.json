@@ -1,6 +1,6 @@
 {
     "name": "dbwhddn10/illuminate-extend",
-    "version": "2.0.0",
+    "version": "2.1.0",
     "authors": [
         {
             "name": "dbwhddn10",
@@ -8,9 +8,12 @@
         }
     ],
     "autoload": {
-		"classmap": [
-			"src/"
-		]
-	},
+        "psr-4": {
+            "Dbwhddn10\\Illuminate\\": "src/"
+        },
+    },
+    "require": {
+        "dbwhddn10/php-functional-service": "dev-master",
+    },
     "license": "MIT"
 }
