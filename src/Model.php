@@ -4,6 +4,7 @@ namespace Dbwhddn10\Illuminate;
 
 use Closure;
 use Dbwhddn10\Illuminate\Collection;
+use Dbwhddn10\Illuminate\Query;
 use Dbwhddn10\Illuminate\Relation;
 
 class Model extends \Illuminate\Database\Eloquent\Model

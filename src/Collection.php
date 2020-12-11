@@ -4,8 +4,8 @@ namespace Dbwhddn10\Illuminate;
 
 use Illuminate\Support\Arr;
 
-class Collection extends \Illuminate\Database\Eloquent\Collection {
-
+class Collection extends \Illuminate\Database\Eloquent\Collection
+{
     public function loadVisible($list)
     {
         $list = is_array($list) ? $list : explode(',', $list);
@@ -56,6 +56,4 @@ class Collection extends \Illuminate\Database\Eloquent\Collection {
             }
         }
     }
-
 }
-

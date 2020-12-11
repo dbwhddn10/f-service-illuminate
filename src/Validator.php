@@ -2,8 +2,8 @@
 
 namespace Dbwhddn10\Illuminate;
 
-class Validator extends \Illuminate\Validation\Validator {
-
+class Validator extends \Illuminate\Validation\Validator
+{
     public function __construct($translator, array $data, array $rules, array $messages = [], array $customAttributes = [])
     {
         parent::__construct(
