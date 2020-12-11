@@ -6,7 +6,7 @@ use Illuminate\Support\Arr;
 
 class Collection extends \Illuminate\Database\Eloquent\Collection
 {
-    public function loadVisible($list)
+    public function load($list)
     {
         $list = is_array($list) ? $list : explode(',', $list);
         $relations = [];
