@@ -10,10 +10,10 @@
     "autoload": {
         "psr-4": {
             "Dbwhddn10\\Illuminate\\": "src/"
-        },
+        }
     },
     "require": {
-        "dbwhddn10/php-functional-service": "dev-master",
+        "dbwhddn10/php-functional-service": "dev-master"
     },
     "license": "MIT"
 }
