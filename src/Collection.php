@@ -1,6 +1,6 @@
 <?php
 
-namespace Dbwhddn10\Illuminate;
+namespace Dbwhddn10\FService\Illuminate;
 
 use Illuminate\Support\Arr;
 

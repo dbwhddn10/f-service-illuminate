@@ -1,11 +1,11 @@
 <?php
 
-namespace Dbwhddn10\Illuminate;
+namespace Dbwhddn10\FService\Illuminate;
 
 use Closure;
-use Dbwhddn10\Illuminate\Collection;
-use Dbwhddn10\Illuminate\Query;
-use Dbwhddn10\Illuminate\Relation;
+use Dbwhddn10\FService\Illuminate\Collection;
+use Dbwhddn10\FService\Illuminate\Query;
+use Dbwhddn10\FService\Illuminate\Relation;
 
 class Model extends \Illuminate\Database\Eloquent\Model
 {

@@ -1,6 +1,6 @@
 <?php
 
-namespace Dbwhddn10\Illuminate\Providers;
+namespace Dbwhddn10\FService\Illuminate\Providers;
 
 use ArrayIterator;
 use Illuminate\Database\Eloquent\Relations\Relation;

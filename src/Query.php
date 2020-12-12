@@ -1,6 +1,6 @@
 <?php
 
-namespace Dbwhddn10\Illuminate;
+namespace Dbwhddn10\FService\Illuminate;
 
 class Query extends \Illuminate\Database\Eloquent\Builder
 {

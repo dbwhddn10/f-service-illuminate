@@ -1,9 +1,9 @@
 <?php
 
-namespace Dbwhddn10\Illuminate\Http;
+namespace Dbwhddn10\FService\Illuminate\Http;
 
-use Dbwhddn10\Illuminate\Model;
-use Dbwhddn10\Illuminate\Service;
+use Dbwhddn10\FService\Illuminate\Model;
+use Dbwhddn10\FService\Illuminate\Service;
 use Illuminate\Database\Eloquent\Relations\Relation;
 use Illuminate\Http\Response;
 use Illuminate\Pagination\AbstractPaginator;

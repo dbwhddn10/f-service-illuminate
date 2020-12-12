@@ -1,6 +1,6 @@
 <?php
 
-namespace Dbwhddn10\Illuminate\Http;
+namespace Dbwhddn10\FService\Illuminate\Http;
 
 class RequestInputTransformMiddleware
 {

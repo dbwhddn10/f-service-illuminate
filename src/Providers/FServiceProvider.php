@@ -1,10 +1,10 @@
 <?php
 
-namespace Dbwhddn10\Illuminate\Providers;
+namespace Dbwhddn10\FService\Illuminate\Providers;
 
 use Dbwhddn10\FService\Service;
-use Dbwhddn10\Illuminate\Collection;
-use Dbwhddn10\Illuminate\Validator;
+use Dbwhddn10\FService\Illuminate\Collection;
+use Dbwhddn10\FService\Illuminate\Validator;
 use Illuminate\Support\ServiceProvider;
 use Illuminate\Validation\Factory as ValidationFactory;
 

@@ -1,10 +1,10 @@
 <?php
 
-namespace Dbwhddn10\Illuminate;
+namespace Dbwhddn10\FService\Illuminate;
 
 use Closure;
-use Dbwhddn10\Illuminate\Model;
-use Dbwhddn10\Illuminate\Query;
+use Dbwhddn10\FService\Illuminate\Model;
+use Dbwhddn10\FService\Illuminate\Query;
 use Illuminate\Database\Eloquent\Collection;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
