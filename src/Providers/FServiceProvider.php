@@ -12,11 +12,11 @@ class FServiceProvider extends ServiceProvider
 {
     public function boot()
     {
-    	Service::setCollectionResolver(function ($items) {
+        Service::setResolverForNewCollection(function ($items=[]) {
 
 	        return new Collection($items);
     	});
-    	Service::setValidationErrorsResolver(function () {
+        Service::setResolverForGetValidationErrors(function ($data=[], $ruleLists=[], $names=[]) {
 
 	        $factory = app(ValidationFactory::class);
 	        $factory->resolver(function ($tr, array $data, array $rules, array $messages, array $names)
@@ -24,7 +24,7 @@ class FServiceProvider extends ServiceProvider
 	            return new Validator($tr, $data, $rules, $messages, $names);
 	        });
 
-	        $validator = $factory->make($data, $rules, $messages=[], $names);
+	        $validator = $factory->make($data, $ruleLists, $messages=[], $names);
 	        $validator->passes();
 
 	        return $validator->errors()->all();
