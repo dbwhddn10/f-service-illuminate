@@ -64,6 +64,8 @@ class ServiceRunMiddleware
             ]);
 
             DB::commit();
+
+            $service->runAfterCommitCallbacks();
         }
         else
         {
