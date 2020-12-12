@@ -1,5 +1,5 @@
 {
-    "name": "dbwhddn10/illuminate",
+    "name": "dbwhddn10/f-service-illuminate",
     "version": "2.1.0",
     "authors": [
         {
@@ -9,11 +9,11 @@
     ],
     "autoload": {
         "psr-4": {
-            "Dbwhddn10\\Illuminate\\": "src/"
+            "Dbwhddn10\\FService\\Illuminate\\": "src/"
         }
     },
     "require": {
-        "dbwhddn10/php-functional-service": "dev-master"
+        "dbwhddn10/f-service-php": "dev-master"
     },
     "license": "MIT"
 }
