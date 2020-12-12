@@ -2,7 +2,7 @@
 
 namespace Dbwhddn10\FService\Illuminate\Http;
 
-class RequestInputTransformMiddleware
+class RequestInputValueCastingMiddleware
 {
     public function handle($request, $next)
     {
