@@ -28,12 +28,12 @@ class ServiceParameterSettingMiddleware
         $traits   = $class::getAllTraits()->all();
         $loaders  = $class::getAllLoaders()->all();
 
-        if ( $request->offsetExists('token') )
+        if ( !isset($data['token']) && $request->offsetExists('token') )
         {
             $data['token']  = $request->offsetGet('token');
             $names['token'] = '[token]';
         }
-        else
+        else if ( !isset($data['token']) )
         {
             $data['token']  = $request->bearerToken() ? : '';
             $names['token'] = 'header[authorization]';
