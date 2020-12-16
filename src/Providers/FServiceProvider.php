@@ -3,8 +3,8 @@
 namespace Dbwhddn10\FService\Illuminate\Providers;
 
 use Dbwhddn10\FService\Service;
-use Dbwhddn10\FService\Illuminate\Collection;
 use Dbwhddn10\FService\Illuminate\Validator;
+use Illuminate\Support\Collection;
 use Illuminate\Support\ServiceProvider;
 use Illuminate\Validation\Factory as ValidationFactory;
 
