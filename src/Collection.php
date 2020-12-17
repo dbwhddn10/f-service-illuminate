@@ -45,9 +45,11 @@ class Collection extends \Illuminate\Database\Eloquent\Collection
 
             foreach ( $groupLists as $modelClass => $groupList )
             {
-                $model = app($modelClass);
+                $model   = app($modelClass);
                 $columns = array_diff(array_merge($model->getFillable(), $model->getGuarded()), $model->getHidden());
-                $groupList->load($rel.':'.implode(',', $columns));
+                $args    = [$rel.':'.implode(',', $columns)];
+
+                call_user_func_array([$groupList, 'parent::load'], $args);
             }
 
             if ( $v !== true )
