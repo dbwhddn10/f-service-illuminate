@@ -3,9 +3,9 @@
 namespace Dbwhddn10\FService\Illuminate;
 
 use Closure;
-use Dbwhddn10\FService\Illuminate\Collection;
 use Dbwhddn10\FService\Illuminate\Query;
 use Dbwhddn10\FService\Illuminate\Relation;
+use Illuminate\Database\Eloquent\Collection;
 
 class Model extends \Illuminate\Database\Eloquent\Model
 {
