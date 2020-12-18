@@ -8,7 +8,11 @@ class RequestInputValueCastingMiddleware
     {
         foreach ( $request->all() as $key => $value )
         {
-            if ( $value === 'null' )
+            if ( $value === null )
+            {
+                $value = '';
+            }
+            else if ( $value === 'null' )
             {
                 $value = null;
             }
