@@ -51,7 +51,7 @@ class ServiceParameterSettingMiddleware
             $names['limit'] = '[limit]';
         }
 
-        if ( array_key_exists('id', $ruleLists) || $request->route('id') )
+        if ( $request->route('id') )
         {
             $data['id']  = $request->route('id') ? $request->route('id') : '';
             $names['id'] = $request->route('id') ? $request->route('id') : '';
